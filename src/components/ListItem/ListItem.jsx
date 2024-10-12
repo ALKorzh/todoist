@@ -1,45 +1,41 @@
-import "./ListItem.css"
-import React from "react"
+import './ListItem.css';
+import React from 'react';
 
 class ListItem extends React.Component {
   constructor(props) {
-    super(props)
+    super(props);
     this.state = {
       isHovered: false,
-    }
+    };
   }
 
   handleDelete = (e) => {
-    e.preventDefault()
-    this.props.onItemDelete(this.props.id)
-  }
+    e.preventDefault();
+    this.props.onItemDelete(this.props.id);
+  };
 
   handleDoneChange = (e) => {
-    const value = e.target.checked
-    this.props.onItemUpdate(this.props.id, value)
-  }
+    const value = e.target.checked;
+    this.props.onItemUpdate(this.props.id, value);
+  };
 
   handleMouseEnter = () => {
-    this.setState({ isHovered: true })
-  }
+    this.setState({ isHovered: true });
+  };
 
   handleMouseLeave = () => {
-    this.setState({ isHovered: false })
-  }
+    this.setState({ isHovered: false });
+  };
 
   render() {
     return (
       <li
-        className={this.props.done ? "listItemDone" : "listItem"}
+        className={this.props.done ? 'listItemDone' : 'listItem'}
         onMouseEnter={this.handleMouseEnter}
         onMouseLeave={this.handleMouseLeave}
       >
         <div className="info-check">
-          <input
-            type="checkbox"
-            onChange={this.handleDoneChange}
-            checked={this.props.done}
-          />
+          <input type="checkbox" onChange={this.handleDoneChange} checked={this.props.done} />
           <div className="title-description">
             <p className="title">{this.props.title}</p>
             <p className="description">{this.props.description}</p>
@@ -49,22 +45,17 @@ class ListItem extends React.Component {
 
         <div className="time-btn">
           <p className="time">
-            {this.props.timestamp.toLocaleDateString()}{" "}
-            {this.props.timestamp.toLocaleTimeString()}
+            {this.props.timestamp.toLocaleDateString()} {this.props.timestamp.toLocaleTimeString()}
           </p>
           {this.state.isHovered && (
-            <button
-              type="submit"
-              onClick={this.handleDelete}
-              className="delete-button"
-            >
+            <button type="submit" onClick={this.handleDelete} className="delete-button">
               Delete
             </button>
           )}
         </div>
       </li>
-    )
+    );
   }
 }
 
-export default ListItem
+export default ListItem;

@@ -1,17 +1,17 @@
-import "./App.css"
-import React from "react"
-import NewItemForm from "./components/NewItemForm/NewItemForm"
-import FilteredList from "./components/FilteredList/FilteredList"
+import './App.css';
+import React from 'react';
+import NewItemForm from './components/NewItemForm/NewItemForm';
+import FilteredList from './components/FilteredList/FilteredList';
 
 class App extends React.Component {
   constructor() {
-    super()
+    super();
     this.state = {
       list: [],
       filter: false,
-      searchQuery: "",
+      searchQuery: '',
       severity: [],
-    }
+    };
   }
 
   onItemCreate = (title, description, timestamp, severity) => {
@@ -22,44 +22,44 @@ class App extends React.Component {
       timestamp,
       done: false,
       severity,
-    }
+    };
     this.setState((prevState) => ({
       list: [...prevState.list, newItem],
-    }))
-  }
+    }));
+  };
 
   onItemDelete = (id) => {
     this.setState((prevState) => ({
       list: prevState.list.filter((el) => el.id !== id),
-    }))
-  }
+    }));
+  };
 
   onItemUpdate = (id, done) => {
     this.setState((prevState) => ({
       list: prevState.list.map((el) => (id === el.id ? { ...el, done } : el)),
-    }))
-  }
+    }));
+  };
 
   onFilterUpdate = (filter) => {
-    this.setState({ filter })
-  }
+    this.setState({ filter });
+  };
 
   onSearchChange = (query) => {
-    this.setState({ searchQuery: query })
-  }
+    this.setState({ searchQuery: query });
+  };
 
   onSeverityChange = (event) => {
-    const { name, checked } = event.target
+    const { name, checked } = event.target;
     this.setState((prevState) => {
       const newSeverity = checked
         ? [...prevState.severity, name]
-        : prevState.severity.filter((severity) => severity !== name)
-      return { severity: newSeverity }
-    })
-  }
+        : prevState.severity.filter((severity) => severity !== name);
+      return { severity: newSeverity };
+    });
+  };
 
   generateTasks = () => {
-    const newTasks = []
+    const newTasks = [];
     for (let i = 0; i < 1000; i++) {
       newTasks.push({
         id: i,
@@ -67,14 +67,13 @@ class App extends React.Component {
         description: `Description for task ${i + 1}`,
         timestamp: new Date(),
         done: Math.random() < 0.5,
-        severity:
-          Math.random() < 0.5 ? "high" : Math.random() < 0.5 ? "medium" : "low",
-      })
+        severity: Math.random() < 0.5 ? 'high' : Math.random() < 0.5 ? 'medium' : 'low',
+      });
     }
     this.setState((prevState) => ({
       list: [...prevState.list, ...newTasks],
-    }))
-  }
+    }));
+  };
 
   render() {
     return (
@@ -97,7 +96,7 @@ class App extends React.Component {
             <input
               type="checkbox"
               name="low"
-              checked={this.state.severity.includes("low")}
+              checked={this.state.severity.includes('low')}
               onChange={this.onSeverityChange}
             />
             Low
@@ -106,7 +105,7 @@ class App extends React.Component {
             <input
               type="checkbox"
               name="medium"
-              checked={this.state.severity.includes("medium")}
+              checked={this.state.severity.includes('medium')}
               onChange={this.onSeverityChange}
             />
             Medium
@@ -115,7 +114,7 @@ class App extends React.Component {
             <input
               type="checkbox"
               name="high"
-              checked={this.state.severity.includes("high")}
+              checked={this.state.severity.includes('high')}
               onChange={this.onSeverityChange}
             />
             High
@@ -133,8 +132,8 @@ class App extends React.Component {
           onSeverityChange={this.onSeverityChange}
         />
       </div>
-    )
+    );
   }
 }
 
-export default App
+export default App;

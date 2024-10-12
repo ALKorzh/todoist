@@ -1,68 +1,68 @@
-import "./NewItemForm.css"
-import React from "react"
+import './NewItemForm.css';
+import React from 'react';
 
 class NewItemForm extends React.Component {
   constructor(props) {
-    super(props)
+    super(props);
     this.state = {
-      title: "",
-      description: "",
-      severity: "medium",
-      titleError: "",
-    }
+      title: '',
+      description: '',
+      severity: 'medium',
+      titleError: '',
+    };
   }
 
   handleTitleChange = (e) => {
-    const value = e.target.value
-    this.setState({ title: value, titleError: "" })
-  }
+    const value = e.target.value;
+    this.setState({ title: value, titleError: '' });
+  };
 
   handleDescriptionChange = (e) => {
-    const value = e.target.value
-    this.setState({ description: value })
-  }
+    const value = e.target.value;
+    this.setState({ description: value });
+  };
 
   handleSeverityChange = (e) => {
-    const value = e.target.value
-    this.setState({ severity: value })
-  }
+    const value = e.target.value;
+    this.setState({ severity: value });
+  };
 
   validateTitle(title) {
     if (!title) {
-      return "The task name cannot be empty."
+      return 'The task name cannot be empty.';
     }
     if (title.trim() !== title) {
-      return "The task name cannot begin or end with whitespace characters."
+      return 'The task name cannot begin or end with whitespace characters.';
     }
-    return ""
+    return '';
   }
 
   handleSubmit = (e) => {
-    e.preventDefault()
-    const { title, description, severity } = this.state
+    e.preventDefault();
+    const { title, description, severity } = this.state;
 
-    const titleError = this.validateTitle(title)
+    const titleError = this.validateTitle(title);
     if (titleError) {
-      this.setState({ titleError })
-      return
+      this.setState({ titleError });
+      return;
     }
 
-    this.props.onItemCreate(title, description, new Date(), severity)
+    this.props.onItemCreate(title, description, new Date(), severity);
 
     this.setState({
-      title: "",
-      description: "",
-      severity: "medium",
-      titleError: "",
-    })
-  }
+      title: '',
+      description: '',
+      severity: 'medium',
+      titleError: '',
+    });
+  };
 
   handleKeyDown = (e) => {
-    if (e.key === "Enter") {
-      e.preventDefault()
-      this.handleSubmit(e)
+    if (e.key === 'Enter') {
+      e.preventDefault();
+      this.handleSubmit(e);
     }
-  }
+  };
 
   render() {
     return (
@@ -76,7 +76,7 @@ class NewItemForm extends React.Component {
             placeholder="Enter the task name"
           />
           {this.state.titleError && (
-            <div className="error-message" style={{ color: "red" }}>
+            <div className="error-message" style={{ color: 'red' }}>
               {this.state.titleError}
             </div>
           )}
@@ -103,8 +103,8 @@ class NewItemForm extends React.Component {
           Create
         </button>
       </form>
-    )
+    );
   }
 }
 
-export default NewItemForm
+export default NewItemForm;
